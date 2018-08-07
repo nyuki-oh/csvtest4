@@ -47,6 +47,13 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
+        ],
+        "post-install-cmd": [
+            "chmod -R 777 storage"
+        ],
+        "compile": [
+            "@php -r \"file_exists('.env') || copy('.env.heroku', '.env');\"",
+            "@php artisan key:generate"
         ]
     },
     "config": {
