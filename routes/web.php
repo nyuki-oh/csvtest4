@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Facades\DB;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,5 +12,7 @@
 */
 
 Route::get('/', function () {
+    $row = DB::table('hoge')->first();
+    print_r($row);
     return view('welcome');
 });
