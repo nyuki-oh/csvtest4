@@ -33,19 +33,18 @@ class CreateHogeTable extends Migration
         $records = $reader->getRecords();
         foreach ($records as $r) {
             print_r($r);
-            $lnc = $r['lunch'];
-            if ($lnc == '') {
-                $lnc = 'NULL';
+            $ri = $r;
+            if ($ri['lunch'] == '') {
+                $ri['lunch'] = NULL;
             }
-            $wlk = $r['walking'];
-            if ($wlk == '') {
-                $wlk = 'NULL';
+            if ($ri['walking'] == '') {
+                $ri['walking'] = NULL;
             }
-            $dst = $r['distance'];
-            if ($dst == '') {
-                $dst ='NaN';
+            if ($ri['distance'] == '') {
+                $ri['distance'] = NULL;
             }
-            DB::statement("INSERT INTO hoge (invalid,name,category_l,category_s,category,lunch,walking,distance,url) VALUES ('{$r['invalid']}','{$r['name']}','{$r['category_l']}','{$r['category_s']}','{$r['category']}',{$lnc},{$wlk},{$dst},'{$r['url']}');");
+            DB::table('hoge')->insert($ri);
+            //DB::statement("INSERT INTO hoge (invalid,name,category_l,category_s,category,lunch,walking,distance,url) VALUES ('{$r['invalid']}','{$r['name']}','{$r['category_l']}','{$r['category_s']}','{$r['category']}',{$lnc},{$wlk},{$dst},'{$r['url']}');");
         }
         //DB::statement("COPY hoge (name,category_l,category_s,category,lunch,distance,url) FROM '".realpath("./test.csv")."' WITH CSV");
     }
